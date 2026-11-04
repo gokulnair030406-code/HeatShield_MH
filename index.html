@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="wrap">
+<div class="welcome-row"><div><span class="eyebrow">COMMAND CENTER / MAHARASHTRA</span><div class="welcome-title">Good evening, <span class="grad">Climate Watch.</span></div><p class="muted sm">A live-feeling workspace for exploring heat exposure, testing ideas and planning cooler neighbourhoods.</p></div><div class="system-state"><i class="live-dot"></i><span>MODEL ENGINE READY</span><small>Local demo environment</small></div></div>
+<section class="hero">
+  <div>
+    <p class="eyebrow">MAHARASHTRA · CLIMATE RESILIENCE · DEEP LEARNING</p>
+    <h1>Explore heat vulnerability across Maharashtra.<br><span class="grad">A neural network estimates a Heat Vulnerability Index.</span></h1>
+    <p class="lead">HeatShield uses your Maharashtra vulnerability CSV as its only source dataset. The 7–32–16–1 neural network estimates a proxy vulnerability index for supplied and unsampled locations.</p>
+    <div class="cta"><a class="btn primary" href="/map">Open the Heat Map →</a><a class="btn" href="/simulator">Run a scenario</a></div>
+  </div>
+  <div class="orb"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="core"><b id="heroAvg">–</b><span>avg HVI · <i id="heroMonth">May</i></span></div></div>
+</section>
+
+<div class="months" id="homeMonths"></div>
+<section class="kpis" id="kpis"></section>
+
+<section class="signal-strip" id="signalStrip">
+ <div><span class="signal-icon">◉</span><div><small>NETWORK COVERAGE</small><b>31 locations</b><em>Across Maharashtra</em></div></div>
+ <div><span class="signal-icon">⌁</span><div><small>MODEL INPUTS</small><b>7 signals</b><em>Environmental + social</em></div></div>
+ <div><span class="signal-icon">◷</span><div><small>TIME WINDOW</small><b>Mar – Jun</b><em>Seasonal demo scenarios</em></div></div>
+ <div><span class="signal-icon">⬡</span><div><small>MODEL PIPELINE</small><b>Neural network</b><em>32 → 16 → 1</em></div></div>
+</section>
+<section class="two">
+  <div class="card"><h3>🚩 Priority watchlist</h3><div id="watch" class="list"></div></div>
+  <div class="card"><h3>📈 Statewide vulnerability overview</h3><canvas id="trend" height="170"></canvas><div class="muted sm">Mean model score across the 34 supplied locations.</div></div>
+</section>
+
+<section class="card fielddesk" id="fielddesk">
+ <div class="field-head"><div><span class="eyebrow">OPERATIONS / FIELD DESK</span><h2>From prediction to action.</h2><p class="muted">A compact workflow for exploring a hotspot, testing a response and documenting the result.</p></div><span class="field-mark">HS / 01</span></div>
+ <div class="field-grid">
+  <a href="/map"><span>01 / EXPLORE</span><b>Locate a hotspot</b><small>Click a map point to inspect its predicted risk and nearby reference stations.</small><i>Open map ↗</i></a>
+  <a href="/simulator"><span>02 / EXPERIMENT</span><b>Test a cooling plan</b><small>Change greenery, built-up area and night cooling to see how the model responds.</small><i>Run scenario ↗</i></a>
+  <a href="/data"><span>03 / VALIDATE</span><b>Score your own data</b><small>Bring a CSV with the seven required features and export scored rows.</small><i>Open data lab ↗</i></a>
+ </div>
+</section>
+<h2 class="sec">Your climate intelligence toolkit</h2>
+<section class="grid">
+  <a class="card tile" href="/map"><span class="ico">🗺️</span><h3>Probe any point</h3><p>The model scores every pixel of the state. Click to interpolate local conditions and get an instant prediction with explanations.</p></a>
+  <a class="card tile" href="/simulator"><span class="ico">🧪</span><h3>Scenario simulator</h3><p>Seven sliders, live weather import from Open-Meteo, and an intervention planner that ranks what cools a place most.</p></a>
+  <a class="card tile" href="/data"><span class="ico">📂</span><h3>Data lab</h3><p>Upload your own CSV, score every row with the network and download the results.</p></a>
+  <a class="card tile" href="/model"><span class="ico">🧠</span><h3>Model lab</h3><p>Architecture, training curves, accuracy and permutation feature importance.</p></a>
+</section>
+
+<section class="card steps"><h3>How a prediction is made</h3>
+  <div class="flow"><span>7 inputs</span>→<span>Scaler</span>→<span>Dense 32 · ReLU</span>→<span>Dropout .10</span>→<span>Dense 16 · ReLU</span>→<span>Dense 1 · Sigmoid ×100</span>→<span class="hot">Risk 0–100</span></div>
+</section>
+<section class="two lower-panels">
+ <div class="card"><span class="eyebrow">MODEL TRANSPARENCY</span><h3>What this dashboard is (and isn't)</h3><p class="muted">HeatShield uses a dense neural network to estimate a heat-vulnerability proxy from seven inputs. The bundled Maharashtra dataset and target labels are formula-generated proxy labels for demonstration. It is not a real-time government warning service.</p><a class="text-link" href="/model">Inspect the model architecture →</a></div>
+ <div class="card"><span class="eyebrow">QUICK START</span><h3>Three-minute exploration</h3><ol class="quick-steps"><li>Choose a month on the overview.</li><li>Open the map and click a location.</li><li>Try a what-if change and compare the score.</li></ol><a class="text-link" href="/map">Start exploring →</a></div>
+</section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><script src="{{ url_for('static', filename='js/home.js') }}"></script>{% endblock %}

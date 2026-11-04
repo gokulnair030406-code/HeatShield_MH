@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block title %}Heat Map{% endblock %}
+{% block bodyclass %}fullpage{% endblock %}
+{% block head %}<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">{% endblock %}
+{% block content %}
+<div class="mapwrap">
+  <div id="map"></div>
+  <div class="bar glass">
+    <div class="seg" id="monthSeg">{% for k,v in months.items() %}<button data-m="{{k}}" class="{{ 'on' if k==5 }}">{{v[:3]}}</button>{% endfor %}</div>
+    <button class="btn sm" id="play">▶ Time-lapse</button>
+    <div class="seg" id="layerSeg"><button data-l="risk" class="on">AI risk</button><button data-l="temp">Temp</button><button data-l="water">Water gap</button></div>
+    <input id="search" list="places" placeholder="Search a city…" autocomplete="off"><datalist id="places"></datalist>
+  </div>
+  <div class="panel left glass" id="hot"><h4>🔥 Hottest now</h4><div id="hotList" class="list"></div></div>
+  <div class="legend glass"><span id="legTitle">AI heat-risk score</span><i class="ramp"></i><div><small id="legLo">0</small><small id="legHi">100</small></div></div>
+  <aside class="drawer glass" id="drawer">
+    <button class="x" id="closeD">×</button>
+    <div id="drawerBody"><div class="intro"><div class="pulse"></div><h3>Click anywhere on the map</h3><p>The network interpolates the seven inputs from nearby stations and predicts the heat risk at that exact spot.</p></div></div>
+  </aside>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block scripts %}<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="{{ url_for('static', filename='js/map.js') }}"></script>{% endblock %}

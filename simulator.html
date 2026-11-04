@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% block title %}Simulator{% endblock %}
+{% block content %}
+<main class="wrap">
+<h1 class="page">🧪 HVI Scenario Simulator</h1>
+<p class="lead2">Adjust the seven vulnerability inputs and inspect the model response. Values outside supplied CSV locations are illustrative scenarios, not observations.</p>
+<section class="sim">
+  <div class="card">
+    <h3>Scenario</h3>
+    <label class="f">Name<input id="place" value="My test location"></label>
+    <div class="muted sm">Scenario values are user-entered and do not become new training records.</div>
+    <div id="sliders"></div>
+    <div class="row"><button class="btn primary" id="go">🚀 Predict HVI</button><button class="btn" id="reset">Reset</button></div>
+  </div>
+  <div>
+    <div class="card" id="result"><div class="muted">Loading…</div></div>
+    <div class="card"><h3>🧭 Input sensitivity</h3><div class="muted sm">Effect of each input compared with a typical Maharashtra location.</div><div id="drv"></div></div>
+    <div class="card"><h3>🛠️ Model limitations</h3><div class="muted sm">Intervention effects are not validated by this dataset.</div><div id="int"></div></div>
+    <div class="card"><h3>🕘 Recent scenarios</h3><div id="hist" class="muted sm">None yet.</div></div>
+  </div>
+</section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/simulator.js') }}"></script>{% endblock %}

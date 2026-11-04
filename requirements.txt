@@ -1,0 +1,4 @@
+flask>=3.0
+numpy
+# optional - only needed if you want to (re)train with PyTorch via train_torch.py
+# torch

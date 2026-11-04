@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}HeatShield MH{% endblock %} · AI Climate Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+{% block head %}{% endblock %}
+</head><body class="{% block bodyclass %}{% endblock %}">
+<canvas id="ambientCanvas" aria-hidden="true"></canvas>
+<div class="topline"><span><i class="live-dot"></i> CLIMATE INTELLIGENCE SYSTEM</span><span id="liveClock">SYNCING LOCAL TIME…</span><span class="demo-tag">DEMO DATA · NOT AN OFFICIAL ALERT</span></div>
+<header class="nav">
+  <a class="brand" href="/"><span class="logo"></span>HeatShield <b>MH</b></a>
+  <button class="burger" aria-label="Menu" onclick="document.body.classList.toggle('menu')">☰</button>
+  <nav>
+    <a href="/" class="{{ 'on' if active=='/' }}">Overview</a>
+    <a href="/map" class="{{ 'on' if active=='/map' }}">🗺️ Heat Map</a>
+    <a href="/simulator" class="{{ 'on' if active=='/simulator' }}">🧪 Simulator</a>
+    <a href="/data" class="{{ 'on' if active=='/data' }}">📂 Data Lab</a>
+    <a href="/model" class="{{ 'on' if active=='/model' }}">🧠 Model Lab</a>
+    <a href="/#fielddesk">Field Desk</a>
+  </nav>
+</header>
+{% block content %}{% endblock %}
+{% block footer %}<footer>HeatShield MH · deep-learning student project · bundled data and labels are <b>simulated</b>. Predictions are educational proxies, not official heat alerts or medical advice.</footer>{% endblock %}
+<div id="toast"></div>
+<button class="command-hint" id="commandHint" title="Quick navigation">⌘ / Ctrl + K <span>Quick launch</span></button>
+<div class="command-modal" id="commandModal" aria-hidden="true">
+ <div class="command-box"><div class="command-head"><span>⌕</span><input id="commandInput" placeholder="Search tools, pages and actions…" autocomplete="off"><kbd>ESC</kbd></div>
+ <div class="command-results" id="commandResults">
+  <a href="/map"><b>🗺️ Heat map</b><small>Explore risk across Maharashtra</small><kbd>MAP</kbd></a>
+  <a href="/simulator"><b>🧪 Scenario simulator</b><small>Test cooling interventions</small><kbd>SIM</kbd></a>
+  <a href="/data"><b>📂 Data lab</b><small>Upload and score a dataset</small><kbd>DATA</kbd></a>
+  <a href="/model"><b>🧠 Model lab</b><small>Inspect neural network details</small><kbd>MODEL</kbd></a>
+ </div></div>
+</div>
+<script>window.META={{ meta|tojson }};window.FEATURES={{ features|tojson }};window.MONTHS={{ months|tojson }};</script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script src="{{ url_for('static', filename='js/premium.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body></html>

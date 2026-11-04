@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block title %}Data Lab{% endblock %}
+{% block content %}
+<main class="wrap">
+<h1 class="page">📂 Data Lab</h1>
+<p class="lead2">Upload a CSV containing the seven model inputs and the network scores every row.</p>
+<section class="card">
+  <div class="muted sm">Required columns</div>
+  <div class="chips">{% for f in features %}<code>{{f}}</code>{% endfor %}</div>
+  <label class="drop" id="drop"><input type="file" id="file" accept=".csv" hidden><b>Drop a CSV here or tap to browse</b><span>Max 5 MB</span></label>
+  <div class="row"><a class="btn sm" href="/api/template">⬇ Download template</a><a class="btn sm" href="/api/dataset?format=csv">⬇ Bundled demo dataset</a></div>
+  <div id="msg"></div>
+</section>
+<section class="card" id="results" hidden>
+  <div class="kpis" id="rk"></div>
+  <div class="row"><button class="btn primary" id="dl">⬇ Download scored CSV</button></div>
+  <div class="tablewrap"><table id="tbl"></table></div>
+</section>
+<section class="card"><h3>Bundled demonstration dataset</h3><div class="muted sm" id="dsInfo"></div><div class="tablewrap"><table id="demo"></table></div></section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/data.js') }}"></script>{% endblock %}
